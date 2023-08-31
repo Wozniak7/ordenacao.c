@@ -61,9 +61,9 @@ int main () {
 int n;
 int *v;
 long ini, fim;
-int *trocas = 0;
-int *comparacoes = 0;
-printf("Digite o tamanho do vetor: ");
+int trocas = 0;
+int comparacoes = 0;
+printf("Digite o tamanho do vetor (0 encerra): ");
 scanf("%d", &n);
 
 srand (time(0));
@@ -78,7 +78,7 @@ exibe_vetor(v, n, "Vetor gerado");
 
  ini = time(0);
 
-bubble_sort(comparacoes, trocas, v, n);
+bubble_sort(&comparacoes, &trocas, v, n);
 
 // insertionsort(v, n);
 
@@ -89,6 +89,9 @@ fim = time(0);
 exibe_vetor(v, n, "Vetor ordenado");
 
 printf("\ntempo de ordenacao: %ld\n ", fim-ini);
+
+printf("\nnumero de comparacoes: %d\n ", comparacoes);
+printf("\nnumero de trocas: %d\n ", trocas);
 
 free(v);
 
