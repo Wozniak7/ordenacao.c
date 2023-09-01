@@ -95,6 +95,7 @@ printf("\nnumero de trocas: %d\n ", trocas);
 
 free(v);
 
+
 printf ("Digite o tamanho do vetor (0 encerra): ");
 
 scanf("%d", &n);
