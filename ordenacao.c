@@ -5,6 +5,7 @@
 void gera(int *, int);
 void exibe(char *, int *, int);
 void bubble(int *, int, int *, int *);
+void inverte(char *,int *, int);
 
 int main() {
     int *v, n, trocas=0, comparacoes=0;
@@ -25,7 +26,10 @@ int main() {
         //exibir
         exibe("vetor ordenado", v, n);
         printf("\nnumero de troca: %d\n", trocas);
-        printf("numero de comparacoes: %d", comparacoes);
+        printf("numero de comparacoes: %d\n", comparacoes);
+        
+        inverte("vetor invertido", v, n);
+
         //ler novo tamanho
 
         free(v);
@@ -65,4 +69,11 @@ void bubble (int *v, int n, int *comparacoes, int *trocas){
             }
         }
     }
+}
+
+void inverte(char * msg, int *v, int n){
+    int i;
+    printf("\n%s\n", msg);
+    for(i=n-1; i>=0; i--)
+        printf("%d |", v[i]);
 }
