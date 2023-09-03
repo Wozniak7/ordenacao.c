@@ -6,6 +6,7 @@ void gera(int *, int);
 void exibe(char *, int *, int);
 void bubble(int *, int, int *, int *);
 void inverte(char *,int *, int);
+void aleatorio(int *, int);
 
 int main() {
     int *v, n, trocas=0, comparacoes=0;
@@ -29,7 +30,8 @@ int main() {
         printf("numero de comparacoes: %d\n", comparacoes);
         
         inverte("vetor invertido", v, n);
-
+        aleatorio(v, n);
+        exibe("vetor novo:", v, n);
         //ler novo tamanho
 
         free(v);
@@ -76,4 +78,13 @@ void inverte(char * msg, int *v, int n){
     printf("\n%s\n", msg);
     for(i=n-1; i>=0; i--)
         printf("%d |", v[i]);
+}
+
+void aleatorio(int *v, int n){
+    int i, x = 0;
+    while (x < 4){
+        v[i] = rand() % (n*10);
+        i++;
+        x++;
+    }
 }
