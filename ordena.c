@@ -161,10 +161,10 @@ int busca_ocorrencias(int *v, int n, int x){
 void media(int *v, int n){
     int soma = 0;
     float m = 0.00;
-    for(int i = 0; i <= n; i++)
+    for(int i = 0; i < n; i++)
         soma += v[i];
     m = soma/n;
-    printf("\nmedia dos valores do vetor eh %d", m);
+    printf("\nmedia dos valores do vetor eh %f", m);
 
 }
 
