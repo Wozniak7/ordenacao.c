@@ -12,7 +12,7 @@ void semi_ordenado(int *, int);
 void vetor_repetido(int *, int);
 int busca_simples (int *, int , int );
 int busca_ocorrencias(int *, int, int);
-
+void media(int *, int);
 
 int main() {
     int *v, n, trocas=0, comparacoes=0, x=0;
@@ -39,6 +39,7 @@ int main() {
         //insertionsort(v, n, &comparacoes, &trocas);
         //exibir
         exibe("vetor ordenado", v, n);
+        media(v,n);
         printf("\nnumero de troca: %d\n", trocas);
         printf("numero de comparacoes: %d\n", comparacoes);
         comparacoes = 0;
@@ -155,6 +156,16 @@ int busca_ocorrencias(int *v, int n, int x){
             cont++;
     }
     return cont;
+}
+
+void media(int *v, int n){
+    int soma = 0;
+    float m = 0.00;
+    for(int i = 0; i <= n; i++)
+        soma += v[i];
+    m = soma/n;
+    printf("\nmedia dos valores do vetor eh %d", m);
+
 }
 
 void bubble (int *v, int n, int *comparacoes, int *trocas){
