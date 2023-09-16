@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int segundos(int, int, int);
+void segundos(int, int, int);
 
 
 int main (){
@@ -12,6 +12,7 @@ int main (){
     return 0;
 }
 
-int segundos(int h, int m, int s){
-
+void segundos(int h, int m, int s){
+    int soma = (h*3600) + (m*60) + s;
+    printf("tempo em segundos: %d\n", soma);
 }
