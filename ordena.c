@@ -4,18 +4,19 @@
 
 void gera(int *, int);
 void exibe(char *, int *, int);
-void bubble(int *, int, int *, int *);
-//void selectionsort(int *, int, int *, int *);
-//void insertionsort(int *, int, int *, int *);
-void inverte(int *, int);
+void bubble(int *, int, long long int *, long long int *);
+// void selectionsort(int *, int, long long int *, long long int *);
+// void insertionsort(int *, int, long long int *, long long int *);
+void inverte(int *, int , long long int *, long long int *);
 void semi_ordenado(int *, int);
 void vetor_repetido(int *, int);
-int busca_simples (int *, int , int );
-int busca_ocorrencias(int *, int, int);
-void media(int *, int);
+// int busca_simples (int *, int , int );
+// int busca_ocorrencias(int *, int, int);
+// void media(int *, int);
 
 int main() {
-    int *v, n, trocas=0, comparacoes=0, x=0;
+    int *v, n, x=0;
+    long long int trocas=0, comparacoes=0;
     //inicializando o gerador pseudo-randômico 
     srand(time(0));
     printf("Digite o tamanho do vetor, 0 encerra: ");
@@ -30,62 +31,68 @@ int main() {
         //gerar randomicamente os valores para o vetor
         gera (v, n);
         //exibir 
-        exibe ("vetor gerado", v, n);
+        // exibe ("vetor gerado", v, n);
+        trocas = 0;
+        comparacoes = 0;
         //bubble
         bubble(v, n, &comparacoes, &trocas);
         //selection
-        //selectionsort(v, n, &comparacoes, &trocas);
+        // selectionsort(v, n, &comparacoes, &trocas);
         //insertion
-        //insertionsort(v, n, &comparacoes, &trocas);
+        // insertionsort(v, n, &comparacoes, &trocas);
         //exibir
-        exibe("vetor ordenado", v, n);
-        media(v,n);
-        printf("\nnumero de troca: %d\n", trocas);
-        printf("numero de comparacoes: %d\n", comparacoes);
+        // exibe("vetor ordenado", v, n);
+        // media(v,n);
+        printf("\nnumero de troca: %llu\n", trocas);
+        printf("numero de comparacoes: %llu\n", comparacoes);
         comparacoes = 0;
         trocas = 0;
 
         //busca simples
-        printf("\nDigite o valor que voce procura: \n");
-        scanf("%i", &x);
-        int bs = busca_simples(v, n, x);
-        int bo = busca_ocorrencias(v, n, x);
-        printf("\nO indice do numero procurado eh: %i", bs);
-        printf("\nO numero de ocorrencias eh: %i\n", bo);
+        // printf("\nDigite o valor que voce procura: \n");
+        // scanf("%i", &x);
+        // int bs = busca_simples(v, n, x);
+        // int bo = busca_ocorrencias(v, n, x);
+        // printf("\nO indice do numero procurado eh: %i", bs);
+        // printf("\nO numero de ocorrencias eh: %i\n", bo);
         
         //bagunçar o vetor 
         semi_ordenado(v, n);
-        exibe("Vetor semi_ordenado", v, n);
+        // exibe("Vetor semi_ordenado", v, n);
         //bubble
         bubble(v, n, &comparacoes, &trocas);
         //selection
-        //selectionsort(v, n, &comparacoes, &trocas);
+        // selectionsort(v, n, &comparacoes, &trocas);
         //insertion
-        //insertionsort(v, n, &comparacoes, &trocas);
+        // insertionsort(v, n, &comparacoes, &trocas);
         //exibir
-        exibe("vetor ordenado", v, n);
-        printf("\nnumero de troca: %d\n", trocas);
-        printf("numero de comparacoes: %d\n", comparacoes);
+        // exibe("vetor ordenado", v, n);
+        printf("\nnumero de troca: %llu\n", trocas);
+        printf("numero de comparacoes: %llu\n", comparacoes);
         comparacoes = 0;
         trocas = 0;
 
         //inverter o vetor
-        inverte(v, n);
-        exibe("Vetor invertido", v, n);
+        inverte(v, n, &comparacoes, &trocas);
+        // exibe("Vetor invertido", v, n);
+        printf("\nnumero de troca: %llu\n", trocas);
+        printf("numero de comparacoes: %llu\n", comparacoes);
+        comparacoes = 0;
+        trocas = 0;
       
         //gerar vetor com numeros repetidos
         vetor_repetido(v, n);
-        exibe("\nVetor com numeros repetidos", v, n);
+        // exibe("\nVetor com numeros repetidos", v, n);
         //bubble
         bubble(v, n, &comparacoes, &trocas);
         //selection
-        //selectionsort(v, n, &comparacoes, &trocas);
+        // selectionsort(v, n, &comparacoes, &trocas);
         //insertion
-        //insertionsort(v, n, &comparacoes, &trocas);
+        // insertionsort(v, n, &comparacoes, &trocas);
         //exibir
-        exibe("vetor ordenado", v, n);
-        printf("\nnumero de troca: %d\n", trocas);
-        printf("numero de comparacoes: %d\n", comparacoes);
+        // exibe("vetor ordenado", v, n);
+        printf("\nnumero de troca: %llu\n", trocas);
+        printf("numero de comparacoes: %llu\n", comparacoes);
 
         //ler novo tamanho
         free(v);
@@ -110,16 +117,18 @@ void exibe (char * msg, int *v, int n){
         printf("%d |", v[i]);
 }
 
-void inverte(int *v, int n){
+void inverte(int *v, int n, long long int *comparacoes, long long int *trocas) {
     int i;
     int aux;
-    for(i=0; i<n/2; i++){
-        aux=0;
-        aux=v[i];
-        v[i]=v[n-i-1];
-        v[n-i-1]=aux;
+    for (i = 0; i < n / 2; i++) {
+        (*comparacoes)++; // Incrementa o contador de comparações
+        aux = v[i];
+        v[i] = v[n - i - 1];
+        v[n - i - 1] = aux;
+        (*trocas) += 3; // Incrementa o contador de trocas em 3 (duas atribuições e uma troca)
     }
 }
+
 
 void semi_ordenado(int *v, int n){
     int i;
@@ -138,43 +147,43 @@ void vetor_repetido(int *v, int n){
     }
 }
 
-int busca_simples (int *v, int n, int x){
-    int i;
-    for(i=0; i<n; i++){
-        if(v[i] == x)
-            return i;
+// int busca_simples (int *v, int n, int x){
+//     int i;
+//     for(i=0; i<n; i++){
+//         if(v[i] == x)
+//             return i;
             
-        }
-    return -1;
-}
+//         }
+//     return -1;
+// }
 
-int busca_ocorrencias(int *v, int n, int x){
-    int i, cont=0;
-    for(i=0; i<n; i++){
-        if(v[i] == x
-        )
-            cont++;
-    }
-    return cont;
-}
+// int busca_ocorrencias(int *v, int n, int x){
+//     int i, cont=0;
+//     for(i=0; i<n; i++){
+//         if(v[i] == x
+//         )
+//             cont++;
+//     }
+//     return cont;
+// }
 
-void media(int *v, int n){
-    int soma = 0;
-    float m = 0.00;
-    for(int i = 0; i < n; i++)
-        soma += v[i];
-    m = soma/n;
-    printf("\nmedia dos valores do vetor eh %f", m);
+// void media(int *v, int n){
+//     int soma = 0;
+//     float m = 0.00;
+//     for(int i = 0; i < n; i++)
+//         soma += v[i];
+//     m = soma/n;
+//     printf("\nmedia dos valores do vetor eh %f", m);
 
-}
+// }
 
-void bubble (int *v, int n, int *comparacoes, int *trocas){
+void bubble(int *v, int n, long long int *comparacoes, long long int *trocas){
     int i, j, aux;
     for(i=1; i<n; i++){
-        *comparacoes = *comparacoes + 1;
+        (*comparacoes)++;
         for(j=0; j<n-i; j++){
             if(v[j] > v[j+1]){ //troca
-                *trocas = *trocas + 1;
+                (*trocas)++;
                 aux = v[j];
                 v[j] = v[j+1];
                 v[j+1] = aux;
@@ -183,22 +192,35 @@ void bubble (int *v, int n, int *comparacoes, int *trocas){
     }
 }
 
-// void insertionsort ( int v[], int n, int *comparacoes, int *trocas){
+// void insertionsort ( int *v, int n,long long int *comparacoes,long long int *trocas){
 //     int j, i,aux;
 //     for ( j = 1; j < n; ++j) {
+//         *comparacoes =*comparacoes + 1;
 //         aux = v[j];
-//             for (i = j-1; i >= 0 && v[i] > aux; --i)
+//             for (i = j-1; i >= 0 && v[i] > aux; --i){
+//                 *trocas = *trocas + 1;
 //                 v[i+1] = v[i];
 //                 v[i+1] = aux;
+//             }
+//     }
+// }
+
+
+// void selectionsort(int v[], int n, long long int *comparacoes, long long int *trocas) {
+//     for (int i = 0; i < n - 1; ++i) {
+//         int min = i;
+//         for (int j = i + 1; j < n; ++j) {
+//             (*comparacoes)++;  
+//             if (v[j] < v[min]) {
+//                 min = j;
+//             }
+//         }
+//         if (min != i) {
+//             // Trocar v[i] e v[min]
+//             int aux = v[i];
+//             v[i] = v[min];
+//             v[min] = aux;
+//             (*trocas)++;  
 //         }
 //     }
-
-// void selectionsort ( int v[],int n, int *comparacoes, int *trocas )
-// {
-//    for (int i = 0; i < n-1; ++i) {
-//   int min = i;
-//   for (int j = i+1; j < n; ++j)
-//      if (v[j] < v[min])  min = j;
-//       int aux = v[i]; v[i] = v[min]; v[min] = aux;
-//    }
 // }
